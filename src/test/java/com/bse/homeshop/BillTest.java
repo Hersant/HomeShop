@@ -1,5 +1,7 @@
 package com.bse.homeshop;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +27,7 @@ class BillTest {
     private Customer customer = new Customer("Juste Leblanc", "19 rue Germain Pilon, Paris");
     private Delivery lowCostRelayDelivery = new RelayDelivery(27);
 
+    @Test
     public void Given2ProductsAndDelivery_WhenGeneratingBill_ThenGetGoodLineNumber() {
         Bill bill = new Bill(customer, lowCostRelayDelivery);
         bill.addProduct(cafe, 1);
@@ -34,12 +37,19 @@ class BillTest {
         assertThat(lineNumber).isEqualTo(20);
     }
 
+    @Test
     public void Given3ProductsAndDelivery_WhenGeneratingBill_ThenGetGoodTotal() {
         Bill bill = new Bill(customer, lowCostRelayDelivery);
         bill.addProduct(cafe, 1);
         bill.addProduct(tv, 1);
         bill.addProduct(fridge, 1);
         assertEquals(870.98, bill.getTotal(), 0.01);
+    }
+
+    @Test
+    public void GivenEmptyProductList_WhenGeneratingBill_ThenThrowsException() {
+        final Bill bill = new Bill(customer, lowCostRelayDelivery);
+        assertThrows(NotProductInBillException.class, () -> bill.generate(writerMock));
     }
 
 }

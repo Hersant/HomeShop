@@ -12,7 +12,10 @@ public class Main {
         bill.addProduct(cafe, 1);
         bill.addProduct(tv, 1);
         bill.addProduct(fridge, 1);
-
-        bill.generate(new FileWriter("src/main/resources/facture_leblanc.txt"));
+        try {
+            bill.generate(new FileWriter("src/main/resources/facture_leblanc.txt"));
+        } catch (NotProductInBillException e) {
+            System.err.println("La liste des produits est vide.");
+        }
     }
 }
