@@ -14,4 +14,8 @@ public class ExpressDelivery implements Delivery {
             return 9.99;
         }
     }
+
+    public String getInfo() {
+        return "Livraison express en 24 heures";
+    }
 }

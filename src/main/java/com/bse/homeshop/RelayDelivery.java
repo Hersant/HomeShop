@@ -16,4 +16,8 @@ public class RelayDelivery implements Delivery {
         }
         return 4.99;
     }
+
+    public String getInfo() {
+        return "Livraison au point relay";
+    }
 }
